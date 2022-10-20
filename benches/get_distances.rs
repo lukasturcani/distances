@@ -9,7 +9,8 @@ fn benchmark_get_distances(c: &mut Criterion) {
         group.throughput(Throughput::Elements(size));
         group.bench_with_input(BenchmarkId::from_parameter(size), &points, |b, points| {
             b.iter(|| {
-                let _distances: Vec<f32> = distances::get_distances(points).collect();
+                let mut distances: Vec<f32> = Vec::with_capacity((size * (size - 1) / 2) as usize);
+                distances.extend(distances::get_distances(points));
             });
         });
     }
