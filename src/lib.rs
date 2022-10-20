@@ -27,17 +27,25 @@ fn squared_difference<T: Float>(a: T, b: T) -> T {
     difference * difference
 }
 
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn test_get_distances() {
+        let points = vec![
+            Vector3 {
+                x: 0.,
+                y: 0.,
+                z: 0.,
+            },
+            Vector3 {
+                x: 1.,
+                y: 0.,
+                z: 0.,
+            },
+        ];
+        let distances: Vec<f32> = get_distances(&points).collect();
+        assert_eq!(distances, vec![1.0]);
     }
 }
