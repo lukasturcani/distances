@@ -6,6 +6,12 @@ pub struct Vector3<T> {
     pub z: T,
 }
 
+impl<T> Vector3<T> {
+    pub fn new(x: T, y: T, z: T) -> Vector3<T> {
+        Vector3 { x, y, z }
+    }
+}
+
 pub fn get_distances<T: Float>(points: &Vec<Vector3<T>>) -> impl Iterator<Item = T> + '_ {
     points.iter().enumerate().flat_map(|(i, point1)| {
         points
@@ -33,18 +39,7 @@ mod tests {
 
     #[test]
     fn test_get_distances() {
-        let points = vec![
-            Vector3 {
-                x: 0.,
-                y: 0.,
-                z: 0.,
-            },
-            Vector3 {
-                x: 1.,
-                y: 0.,
-                z: 0.,
-            },
-        ];
+        let points = vec![Vector3::new(0., 0., 0.), Vector3::new(1., 0., 0.)];
         let distances: Vec<f32> = get_distances(&points).collect();
         assert_eq!(distances, vec![1.0]);
     }
